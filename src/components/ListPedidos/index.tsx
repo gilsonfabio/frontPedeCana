@@ -12,33 +12,13 @@ type ProductsProps = {
 
 const width = Dimensions.get('window').width - 5; 
 
-const ListItem = ({ data }:any) => {
+const ListPedidos = ({ data }:any) => {
 
   const codProd = 4;
   const imageUrl = require("../../assets/images/1.jpg");
   const navigation = useNavigation();
 
   const [countItens, setCountItens] = useState(0);
-
-  const images = [
-    { id: 0, path: require('../../assets/images/0.jpg') },
-    { id: 1, path: require('../../assets/images/1.jpg') },
-    { id: 2, path: require('../../assets/images/2.jpg') },
-    { id: 3, path: require('../../assets/images/3.jpg') },
-    { id: 4, path: require('../../assets/images/4.jpg') },
-    { id: 5, path: require('../../assets/images/5.jpg') },
-    { id: 6, path: require('../../assets/images/6.jpg') },
-    { id: 7, path: require('../../assets/images/7.jpg') },
-    { id: 8, path: require('../../assets/images/8.jpg') },
-    { id: 9, path: require('../../assets/images/9.jpg') },
-    { id: 10, path: require('../../assets/images/10.jpg') },
-    { id: 11, path: require('../../assets/images/11.jpg') },
-    { id: 12, path: require('../../assets/images/12.jpg') },
-    { id: 13, path: require('../../assets/images/13.jpg') },
-    { id: 14, path: require('../../assets/images/14.jpg') },
-    { id: 15, path: require('../../assets/images/15.jpg') },
-    { id: 16, path: require('../../assets/images/16.jpg') },
-  ];
 
   function handleDetalhes(){
     navigation.navigate('Detalhes', {proId: data.prdId});
@@ -47,7 +27,6 @@ const ListItem = ({ data }:any) => {
   return (
     <TouchableOpacity style={styles.item} onPress={handleDetalhes}>
       <View style={[styles.containerProd, styles.shadowProp]}>
-        <Image source={images[data.prdUrlPhoto].path} style={styles.itemPhoto} resizeMode="contain" />
         <View style={styles.itemInfo}>
           <View style={styles.containerTitulo}>
             <Text style={styles.itemP1}>{data.prdDescricao}</Text>
@@ -144,4 +123,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListItem;
+export default ListPedidos;

@@ -11,7 +11,7 @@ import {
 import { StatusBar } from 'expo-status-bar';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome, AntDesign } from '@expo/vector-icons';
-import ListItem from '../../components/ListItem';
+import ListPedidos from '../../components/ListPedidos';
 import { useRoute, useNavigation } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -19,7 +19,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import api from '../../pages/Services/api';
 import { AuthContext } from '../../contexts/auth';
 
-export interface ProductsProps {
+export interface PedidosProps {
     prdId: string;
     prdDescricao: string;
     prdReferencia: string;
@@ -31,11 +31,9 @@ type CarProps = {
   carId: number;
 }
 
-const Produtos = () => {
-  const [produtos, setProdutos] = useState<Array<ProductsProps>>([]); 
+const UltPedidos = () => {
+  const [pedidos, setPedidos] = useState<Array<PedidosProps>>([]); 
   const [searchText, setSearchText] = useState('');
-  const [list, setList] = useState(produtos);
-
   const [nroCar, setNroCar] = useState();
   const [count, setCount] = useState(0);
 
@@ -46,85 +44,28 @@ const Produtos = () => {
 
   useEffect(() => {
     api.get(`products`).then(response => { 
-        setProdutos(response.data);
-        setList(response.data);        
+        setPedidos(response.data);
     }) 
-    
-    let idUsrCar = user.idUsr;    
-    api.get(`searchCar/${idUsrCar}`).then(resp => { 
-      setNroCar(resp.data.pedId)
-      setCount(resp.data.pedQtdtotal)
-    }).catch(() => {
-      alert('Erro no cadastro!');
-    })
-
   }, []);
-
-  useEffect(() => {
-    if (searchText === '') {
-       setList(produtos);
-    } else {
-      setList(
-        produtos.filter(
-          (item) =>
-            item.prdDescricao.toLowerCase().indexOf(searchText.toLowerCase()) > -1
-        )
-      );
-    }
-  }, [searchText]);
-
-  const handleOrderClick = () => {
-    let newList = [...produtos];
-
-    newList.sort((a, b) => (a.prdDescricao > b.prdDescricao ? 1 : b.prdDescricao > a.prdDescricao ? -1 : 0));
-
-    setList(newList);
-  };
-
-  function handlePedidos(){
-    navigation.navigate('UltPedidos', );
-  }
-  
-  function handleCarShopping(){
-    navigation.navigate('CarShopping', {carId: nroCar} );
-  }
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.txtProducts} >Olá, {user.nome}</Text>
-        <TouchableOpacity onPress={handlePedidos} style={styles.btnCar}>
-          <View style={styles.carShop}>                      
-            <AntDesign name="rocket1" size={24} color="black" style={styles.iconCar} />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleCarShopping} style={styles.btnCar}>
-          <View style={styles.carShop}>
-            <View style={styles.backQtde}>
-              <Text style={styles.qtde}>{count}</Text>
-            </View>            
-            <FontAwesome name="shopping-cart" size={26} color="black" style={styles.iconCar} />
-          </View>
-        </TouchableOpacity>  
-      </View>         
-      <View style={styles.searchArea}>
-        <TextInput
-          style={styles.input}
-          placeholder="Pesquise um produto"
-          placeholderTextColor="#7a7474"
-          value={searchText}
-          onChangeText={(t) => setSearchText(t)}
-        />
-        
-      </View>
+        <View style={styles.cntProducts}>
+            <Text style={styles.txtProducts} >{user.nome}, </Text>
+        </View>
+        <View style={styles.cntProducts}>
+            <Text style={styles.txtTitulo} >Esse são seus últmos pedidos:</Text>
+        </View>          
+      </View>               
       <View style={styles.content}>
-      <FlatList
-        data={list}
-        style={styles.list}
-        numColumns={2}
-        renderItem={({ item }) => <ListItem data={item} />}
-        keyExtractor={(item) => item.prdId}
-      />
+        <FlatList
+            data={pedidos}
+            style={styles.list}
+            numColumns={2}
+            renderItem={({ item }) => <ListPedidos data={item} />}
+            keyExtractor={(item) => item.prdId}
+        />
       </View>
       <StatusBar style="light" />
     </SafeAreaView>
@@ -145,10 +86,10 @@ const styles = StyleSheet.create({
   },
   
   header: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     height: 120,
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     backgroundColor: '#FF7826',
     color: '#FFF',
   },
@@ -186,9 +127,22 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+  cntProducts: {
+    flex: 1,
+    width: '80%',
+    height: 40,
+  },
+
   txtProducts: {
+    marginTop: 20,
     marginLeft: 10,
     fontSize: 18,
+    fontWeight: 'bold',
+  },
+
+  txtTitulo: {
+    marginLeft: 10,
+    fontSize: 16,
     fontWeight: 'bold',
   },
 
@@ -221,4 +175,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Produtos;
+export default UltPedidos;

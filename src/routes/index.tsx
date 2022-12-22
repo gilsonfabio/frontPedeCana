@@ -5,6 +5,7 @@ import SignIn from '../pages/SignIn';
 import Produtos from '../pages/Produtos';
 import Detalhes from '../pages/Detalhes';
 import CarShopping from '../pages/CarShopping';
+import UltPedidos from '../pages/UltPedidos';
 import LocEntrega from '../pages/LocEntrega';
 import FrmPagto from '../pages/FrmPagto';
 import CarCredit from '../pages/CarCredit';
@@ -15,6 +16,7 @@ type navigationProps = {
     Produtos: undefined;
     Detalhes: {proId: number} | undefined;
     CarShopping: {carId: number} | undefined;
+    UltPedidos: undefined;
     LocEntrega: undefined;
     FrmPagto: undefined;
     CarCredit: undefined;
@@ -30,6 +32,7 @@ export default function Routes(){
             <Stack.Screen name="Produtos" component={Produtos} options={{headerShown:false}}/>
             <Stack.Screen name="Detalhes" component={Detalhes} options={{headerShown:false}} />
             <Stack.Screen name="CarShopping" component={CarShopping} options={{headerShown:false}} />
+            <Stack.Screen name="UltPedidos" component={UltPedidos} options={{headerShown:false}} />
             <Stack.Screen name="LocEntrega" component={LocEntrega} options={{headerShown:false}} />
             <Stack.Screen name="FrmPagto" component={FrmPagto} options={{headerShown:false}} />
             <Stack.Screen name="CarCredit" component={CarCredit} options={{headerShown:false}} />

@@ -105,17 +105,21 @@ const ListIteCar = ({ data }:any) => {
 
 const styles = StyleSheet.create({  
   containerProd: { 
-    width: '100%',
-    backgroundColor: '#e6ac76',
+    width: '95%',
+    marginLeft: 10,
     marginBottom: 5,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   
   itemInfo: {
+    width: '100%',
     height: 70,
-    backgroundColor: '#e7bf9a',
+    backgroundColor: '#e0ddda',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    borderRadius: 10,
     marginLeft: 2,
     marginRight: 2,
   },
@@ -134,6 +138,7 @@ const styles = StyleSheet.create({
     height: 60,
     flexDirection: 'column',
     marginRight: 2,
+    marginLeft: 5.
   },
 
   colVlrProd: {    
