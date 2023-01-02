@@ -16,7 +16,7 @@ export default function Welcome() {
                 />                
             </View>   
             <Animatable.View delay={600} animation="fadeInUp" style={styles.containerForm} >
-                <Text style={styles.title}>A melhor rede social, ainda é uma rodada de cerveja com os amigos!</Text>
+                <Text style={styles.title}>A melhor rede social, sempre será uma rodada de cerveja com os amigos!</Text>
                 <Text style={styles.text}>Vamos Bebemorar hoje!</Text>
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SignIn')}>
                     <Text style={styles.buttonText}>Acessar</Text>
@@ -32,18 +32,17 @@ const styles = StyleSheet.create({
         backgroundColor: '#FF7826',
     },
     containerLogo: {
-        flex: 2, 
+        flex: 1, 
         backgroundColor: '#FF7826',
-        justifyContent: 'center',
-        alignItems: 'center'
+        marginTop: 10,
     },
     containerForm: {
         flex: 1,
         backgroundColor: '#FFF',
-        borderTopLeftRadius: 25,
-        borderTopRightRadius: 25,
-        paddingStart: '5%',
-        paddingEnd: '5%'
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        paddingStart: '3%',
+        paddingEnd: '3%'
     },
     title: {
         fontSize: 24,

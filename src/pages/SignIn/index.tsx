@@ -1,5 +1,5 @@
 import React, { useState, useContext} from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import axios from 'axios';
 
@@ -17,19 +17,20 @@ export default function SignIn() {
     }
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView style={styles.container}>
             <View style={styles.containerLogo}>
                 <Animatable.Image animation="flipInY"
-                    source={require('../../assets/icone1.png')} resizeMode="contain" 
+                    source={require('../../assets/icone1.png')} style={{width: '30%', height: '300%'}} 
                 />                
-            </View> 
-            <Animatable.View animation="fadeInLeft" delay={500} style={styles.containerHeader}>
-                <Text style={styles.message}>Bem-vindo(a)</Text>
-            </Animatable.View>
+                <Animatable.View animation="fadeInLeft" delay={500} style={styles.containerHeader}>
+                    <Text style={styles.message}>Bem-vindo(a)</Text>
+                </Animatable.View>                   
+            </View>
             <Animatable.View animation="fadeInUp" style={styles.containerForm}>
                 <Text style={styles.title}>Email</Text>
                 <TextInput 
                     placeholder="Digite seu email..." 
+                    keyboardType='email-address'
                     style={styles.input } 
                     value={email}
                     onChangeText={setEmail}
@@ -38,6 +39,7 @@ export default function SignIn() {
                 <Text style={styles.title}>Senha</Text>
                 <TextInput 
                     secureTextEntry={true} 
+                    keyboardType="numeric"
                     placeholder="Digite sua senha..." 
                     style={styles.input }
                     value={password}
@@ -50,7 +52,7 @@ export default function SignIn() {
                     <Text style={styles.registerText}>Não possui uma conta? Cadastre-se</Text>
                 </TouchableOpacity>
             </Animatable.View>
-        </View>
+        </KeyboardAvoidingView>
     );
 }
 
@@ -61,16 +63,19 @@ const styles = StyleSheet.create({
     },
     containerLogo: {
         backgroundColor: '#FF7826',
-        alignItems: 'center'
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        padding: 40,
     },
     containerHeader: {
-        marginBottom: '2%',
-        paddingStart: '1%',
+
     },
     message: {
         fontSize: 28,
         fontWeight: 'bold',
         color: '#FFF',
+        marginLeft: 15,
     },
     containerForm: {
         flex: 1,
@@ -81,13 +86,13 @@ const styles = StyleSheet.create({
         paddingEnd: '5%'
     },
     title: {
-        fontSize: 20,
+        fontSize: 16,
         marginTop: 20,
     },
     input: {
         borderBottomWidth: 1,
-        height: 40,
-        marginBottom: 12,
+        height: 25,
+        marginBottom: 5,
         fontSize: 16,
     },
     button: {

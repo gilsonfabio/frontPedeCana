@@ -54,6 +54,7 @@ const Produtos = () => {
     api.get(`searchCar/${idUsrCar}`).then(resp => { 
       setNroCar(resp.data.pedId)
       setCount(resp.data.pedQtdtotal)
+      
     }).catch(() => {
       alert('Erro no cadastro!');
     })
