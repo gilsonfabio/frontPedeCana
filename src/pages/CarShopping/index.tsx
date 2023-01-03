@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useState, useEffect } from 'react';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import Moment from 'moment';
+
 import {
   SafeAreaView,
   View,
@@ -89,11 +90,11 @@ const CarShopping = () => {
     })
     api.get(`itemscar/${carId}`).then(resp => { 
       setItems(resp.data);
-    })  
+    })    
   }, []);
 
   function handleLocEntrega(){
-    navigation.navigate("FrmPagto");
+    navigation.navigate("CarCredit");
   }
 
   return (

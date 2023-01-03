@@ -9,6 +9,7 @@ import UltPedidos from '../pages/UltPedidos';
 import LocEntrega from '../pages/LocEntrega';
 import FrmPagto from '../pages/FrmPagto';
 import CarCredit from '../pages/CarCredit';
+import Tracking from '../pages/Tracking';
 
 type navigationProps = {
     Welcome: undefined;
@@ -20,6 +21,7 @@ type navigationProps = {
     LocEntrega: undefined;
     FrmPagto: undefined;
     CarCredit: undefined;
+    Tracking: undefined;
 }
 
 const Stack = createNativeStackNavigator<navigationProps>();
@@ -36,6 +38,7 @@ export default function Routes(){
             <Stack.Screen name="LocEntrega" component={LocEntrega} options={{headerShown:false}} />
             <Stack.Screen name="FrmPagto" component={FrmPagto} options={{headerShown:false}} />
             <Stack.Screen name="CarCredit" component={CarCredit} options={{headerShown:false}} />
+            <Stack.Screen name="Tracking" component={Tracking} options={{headerShown:false}} />
         </Stack.Navigator>
     )
 }
