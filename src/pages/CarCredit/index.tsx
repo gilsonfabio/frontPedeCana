@@ -1,22 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, StyleSheet} from "react-native";
 import { useRoute, useNavigation, useLinkProps } from '@react-navigation/native';
 import api from "../Services/api";
 import { WebView } from 'react-native-webview';
+import { AuthContext } from '../../contexts/auth';
 
 export interface filtros {
     "price" ?: number;
     "address" ?: string;
+    "cliEmail"?: string;
+    "cliNome"?: string;
+}
+
+export interface vlrcompraProps {
+    "cmpVlrTotal" ?: number;
 }
 
 const CarCredit = () => {
     const [url, setUrl] = useState('');
     const navigation = useNavigation();
     const route = useRoute();
-
+    const { cmpVlrTotal } = route.params as vlrcompraProps;
+    const {user}: any = useContext(AuthContext);
+    let idUsrCar = user.idUsr; 
+    let usrName = user.nome;
+    let usrEmail = user.email;
+    
     const testeJson:filtros = {
-        price: 100,
-        address: 'Rua 02 qd.5 lt.5 ',
+        price: cmpVlrTotal,
+        address: 'Compra Efetuada online',
+        cliEmail: usrEmail,
+        cliNome: usrName
      }  
 
     useEffect(() => {   
@@ -33,12 +47,12 @@ const CarCredit = () => {
 
     }, [])
 
-    async function stateChange(state) {
+    async function stateChange(state:any) {
         console.log(state);
         let url = state.url;
         if(state.canGoBack == true && !url.includes('mercadopago')){
             if(url.includes("approved")){
-                navigation.navigate("Produtos")                
+                navigation.navigate("Tracking")                
             }else{
                 navigation.navigate("Produtos");
             }

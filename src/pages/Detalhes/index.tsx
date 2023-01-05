@@ -51,7 +51,7 @@ const Detalhes = () => {
   const route = useRoute();
   const { proId } = route.params as ParamsProps;
   
-  const {user } = useContext(AuthContext);
+  const {user} = useContext(AuthContext) ;
   
   const imageUrl = require("../../assets/images/1.jpg");
 
@@ -85,14 +85,28 @@ const Detalhes = () => {
         //setProQtdEstoque(response.data.proQtdEstoque);
         setProAvatar(response.data.prdUrlPhoto);
     })
+/*
+    let idUsrCar = user.idUsr;
+    console.log('Usuário identificado:', idUsrCar)
+    api.get(`searchCar/${idUsrCar}`).then(resp => { 
+      console.log(resp.data)
+      setNroCar(resp.data.pedId)
+      setCount(resp.data.pedQtdtotal)       
+    }).catch(() => {
+      alert('Carrinho iniciado com sucesso!');
+    })
+*/    
+  }, []);
 
+/*
+  useEffect(() => {
     let idUsrCar = user.idUsr;
     api.get(`searchCar/${idUsrCar}`).then(resp => { 
       setNroCar(resp.data.pedId)
       setCount(resp.data.pedQtdtotal)
-    })
-   
-  }, []);
+    })   
+  }, [count]);
+*/
 
   const onPress = () => {    
     setCount(prevCount => prevCount + 1);

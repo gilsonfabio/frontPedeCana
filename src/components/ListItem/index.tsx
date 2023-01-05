@@ -43,7 +43,7 @@ const ListItem = ({ data }:any) => {
   function handleDetalhes(){
     navigation.navigate('Detalhes', {proId: data.prdId});
   }
-
+   
   return (
     <TouchableOpacity style={styles.item} onPress={handleDetalhes}>
       <View style={[styles.containerProd, styles.shadowProp]}>

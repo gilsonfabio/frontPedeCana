@@ -35,6 +35,7 @@ const Produtos = () => {
   const [produtos, setProdutos] = useState<Array<ProductsProps>>([]); 
   const [searchText, setSearchText] = useState('');
   const [list, setList] = useState(produtos);
+  const [atualiza, setAtualiza] = useState(0);
 
   const [nroCar, setNroCar] = useState();
   const [count, setCount] = useState(0);
@@ -51,11 +52,14 @@ const Produtos = () => {
     }) 
     
     let idUsrCar = user.idUsr;    
+
+    console.log(idUsrCar);
+
     api.get(`searchCar/${idUsrCar}`).then(resp => { 
       setNroCar(resp.data.pedId)
-      setCount(resp.data.pedQtdtotal)
-      
+      setCount(resp.data.pedQtdtotal)       
     }).catch(() => {
+      setCount(0)
       alert('Erro no cadastro!');
     })
 
@@ -83,7 +87,7 @@ const Produtos = () => {
   };
 
   function handlePedidos(){
-    navigation.navigate('UltPedidos', );
+    navigation.navigate('UltPedidos' );
   }
   
   function handleCarShopping(){

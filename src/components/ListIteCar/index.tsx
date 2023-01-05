@@ -17,7 +17,7 @@ export interface ProductsProps {
 
 const width = Dimensions.get('window').width - 5; 
 
-const ListIteCar = ({ data }:any) => {
+const ListIteCar = ({ data, setAtualiza }:any) => {
 
   const imageUrl = require("../../assets/images/1.jpg");
   const navigation = useNavigation();
@@ -45,7 +45,7 @@ const ListIteCar = ({ data }:any) => {
   ];
 
   const onPressAdd = () => {    
-    let qtdProd = 1;
+    let qtdProd = 1;    
     api.post('adiprocar', {   
       itePedId: data.itePedId,
       itePedItem: data.itePedItem,
@@ -55,6 +55,7 @@ const ListIteCar = ({ data }:any) => {
       itePedVlrTotal: data.itePedVlrTotal,
     }).then(() => {
         alert('Produto adicionado com sucesso!')
+        setCountItens(countItens + 1 )
     }).catch(() => {
         alert('Erro no cadastro!');
     })  
@@ -62,7 +63,7 @@ const ListIteCar = ({ data }:any) => {
   }
 
   const onPressSub = () => {    
-    let qtdProd = 1;
+    let qtdProd = 1;    
     api.post('subprocar', {      
       itePedId: data.itePedId,
       itePedItem: data.itePedItem,
@@ -72,10 +73,16 @@ const ListIteCar = ({ data }:any) => {
       itePedVlrTotal: data.itePedVlrTotal,
     }).then(() => {
         alert('Produto subtraido com sucesso!')
+        setCountItens(countItens + 1 )
     }).catch(() => {
         alert('Erro no cadastro!');
     })  
   }
+
+  useEffect(() => {
+    setAtualiza(countItens)     
+
+  }, [countItens])
 
   return (
     <View key={data.itePedProId} style={styles.containerProd}>

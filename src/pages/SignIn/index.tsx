@@ -5,15 +5,23 @@ import axios from 'axios';
 
 import api from '../Services/api';
 import { AuthContext } from '../../contexts/auth';
+import { useRoute, useNavigation } from '@react-navigation/native';
 
 export default function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const { signIn }: any = useContext(AuthContext);
-
+    
+    const navigation = useNavigation();
+    const route = useRoute();
+    
     async function handleSignIn(){
         signIn(email, password)
   
+    }
+
+    function handleNewClient(){
+        navigation.navigate('NewClient');
     }
 
     return (
@@ -48,7 +56,7 @@ export default function SignIn() {
                 <TouchableOpacity style={styles.button} onPress={handleSignIn}>
                     <Text style={styles.buttonText}>Acessar</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonRegister} onPress={() => {}}>
+                <TouchableOpacity style={styles.buttonRegister} onPress={handleNewClient}>
                     <Text style={styles.registerText}>Não possui uma conta? Cadastre-se</Text>
                 </TouchableOpacity>
             </Animatable.View>
@@ -114,6 +122,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     registerText: {
-        color: '#a1a1a1',
+        color: '#2884da',
     },
+    
 })

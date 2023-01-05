@@ -53,6 +53,10 @@ export interface numberCarProps {
   carId: number;
 }
 
+type compraProps = {
+  cmpVlrTotal: number;
+}
+
 const CarShopping = () => {
   const [car, setCar] = useState<Array<CarProps>>([]); 
   const [items, setItems] = useState<Array<ProductsProps>>([]); 
@@ -93,8 +97,25 @@ const CarShopping = () => {
     })    
   }, []);
 
-  function handleLocEntrega(){
-    navigation.navigate("CarCredit");
+  useEffect(() => {
+    api.get(`headerCar/${carId}`).then(response => { 
+        setIdCar(response.data.pedId);
+        setCarData(response.data.pedData);
+        setCarUser(response.data.pedCliId);
+        setCarQtdTotal(response.data.pedQtdTotal);
+        setCarVlrTotal(response.data.pedVlrTotal);
+        setCarCodCupom(response.data.pedCupom);
+        setCarVlrPagar(response.data.pedVlrPagar);
+        setCarStatus(response.data.pedStatus);
+        setUsrNome(response.data.cliNome);
+    })
+    api.get(`itemscar/${carId}`).then(resp => { 
+      setItems(resp.data);
+    })    
+  }, [atualiza]);
+
+  function handleLocEntrega(){    
+    navigation.navigate("CarCredit", {cmpVlrTotal: carVlrTotal} );
   }
 
   return (
@@ -112,7 +133,7 @@ const CarShopping = () => {
         style={styles.list}
         numColumns={1}
         keyExtractor={(item) => item.itePedProId}
-        renderItem={({ item }) => <ListIteCar data={item} />}
+        renderItem={({ item }) => <ListIteCar data={item} setAtualiza={setAtualiza} />}
       />
 
       <View  style={styles.colTotaliza}>
